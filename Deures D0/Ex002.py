@@ -26,12 +26,12 @@ def main():
     is_looping = True
 
     # Carregar la imatge d'en Shinnosuke
-    path_shinnosuke = os.path.join(os.path.dirname(__file__), ".\assets\exercici002\shinnosuke.png")
+    path_shinnosuke = os.path.join(os.path.dirname(__file__), "assets\exercici002\shinnosuke.png")
     im_shinnosuke = pygame.image.load(path_shinnosuke).convert_alpha()
     im_shinnosuke = utils.scale_image(pygame, im_shinnosuke, target_width=100)
 
     # Carregar la imatge d'en Shinnosuke
-    path_shiro = os.path.join(os.path.dirname(__file__), ".\assets\exercici002\shiro.png")
+    path_shiro = os.path.join(os.path.dirname(__file__), "assets\exercici002\shiro.png")
     im_shiro = pygame.image.load(path_shiro).convert_alpha()
     im_shiro = utils.scale_image(pygame, im_shiro, target_width=75)
 
@@ -62,7 +62,8 @@ def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
 
-    screen.blit(im_shinnosuke,(375, 125))
+    screen.blit(im_shinnosuke,(325, 165))
+    screen.blit(im_shiro,(225, 205))
 
     pygame.display.update()
 

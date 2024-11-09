@@ -10,11 +10,8 @@ import utils
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-GRAY = (200, 200, 200)
-PINK = (255, 105, 180)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-RED = (255, 0, 0)
+GREEN = (100, 150, 100)
+RED = (200, 0, 0)
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -25,7 +22,18 @@ pygame.display.set_caption('Window Title')
 
 # Bucle de l'aplicació
 def main():
+    global im_shinnosuke, im_shiro
     is_looping = True
+
+    # Carregar la imatge d'en Shinnosuke
+    path_shinnosuke = os.path.join(os.path.dirname(__file__), ".\assets\exercici002\shinnosuke.png")
+    im_shinnosuke = pygame.image.load(path_shinnosuke).convert_alpha()
+    im_shinnosuke = utils.scale_image(pygame, im_shinnosuke, target_width=100)
+
+    # Carregar la imatge d'en Shinnosuke
+    path_shiro = os.path.join(os.path.dirname(__file__), ".\assets\exercici002\shiro.png")
+    im_shiro = pygame.image.load(path_shiro).convert_alpha()
+    im_shiro = utils.scale_image(pygame, im_shiro, target_width=75)
 
     while is_looping:
         is_looping = app_events()
@@ -53,19 +61,8 @@ def app_run():
 def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
-    
-    # Dibuixar el quadre rosa
-    pygame.draw.rect(screen, PINK, (150, 200, 50, 50), 5)
-    
-    # Dibuixar el triangle verd
-    pygame.draw.polygon(screen, GREEN, [(275, 200), (275 - 28, 248), (275 + 28, 248)], 5)
-    
-    # Dibuixar la creu blava
-    pygame.draw.line(screen, BLUE, (350, 200), (400, 250), 5)
-    pygame.draw.line(screen, BLUE, (350, 250), (400, 200), 5)
-    
-    # Dibuixar la rodona vermella
-    pygame.draw.circle(screen, RED, (475, 225), 25, 5)
+
+    screen.blit(im_shinnosuke,(375, 125))
 
     pygame.display.update()
 

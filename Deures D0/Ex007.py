@@ -65,14 +65,14 @@ def app_draw():
         pygame.draw.circle(screen, colors[q], (x2, 175), 25, 2)
         x2 += 100
     
-    grey = 0
+    grisos = 0
     for q in range (0, 10):
         radius = 25
         x = 50 + (q * 100) + radius
-        color = (grey, grey, grey)
+        color = (grisos, grisos, grisos)
         draw_polygon(screen, color, (x, 250 + radius), radius, 3)
         draw_polygon(screen, color, (x, 350 + radius), radius, 5)
-        grey = grey + 25
+        grisos += 25
         
 
     pygame.display.update()

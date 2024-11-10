@@ -28,6 +28,10 @@ rectangles = [
     { "rect": { "x": 450, "y": 250, "width": 150, "height": 50 }, "color": NAVY }
 ]
 
+mouse_pos = { "x": -1, "y": -1 }
+
+fila = -1
+
 pygame.init()
 clock = pygame.time.Clock()
 
@@ -52,21 +56,44 @@ def main():
 
 # Gestionar events
 def app_events():
+    global mouse_pos
+    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
             return False
+        elif event.type == pygame.MOUSEMOTION:
+            if mouse_inside:
+                mouse_pos["x"] = event.pos[0]
+                mouse_pos["y"] = event.pos[1]
+            else:
+                mouse_pos["x"] = -1
+                mouse_pos["y"] = -1
     return True
 
 # Fer càlculs
 def app_run():
-    pass
+    global mouse_pos, fila
 
+    for rectangle in rectangles:
+        rect = rectangle["rect"]
+        if utils.is_point_in_rect(mouse_pos, rect):
+            fila = rectangle
+        
 # Dibuixar
 def app_draw():
+    global fila
+
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
 
-    
+    for rectangle in rectangles:
+        rect = rectangle["rect"]
+
+        if fila == rectangle:
+            pygame.draw.rect(screen, rectangle["color"], (rect["x"],rect["y"],rect["width"],rect["height"]))
+
+        pygame.draw.rect(screen, BLACK, (rect["x"],rect["y"],rect["width"],rect["height"]), 5)
 
     pygame.display.update()
 

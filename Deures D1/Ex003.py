@@ -11,9 +11,9 @@ import utils
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (200, 200, 200)
-PINK = (255, 105, 180)
+YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+BLUE = (50, 150, 255)
 RED = (255, 0, 0)
 
 pygame.init()
@@ -23,12 +23,16 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
 pygame.display.set_caption('Window Title')
 
-# Variables de l'estat del ratolí
+# Variables globals
+window_size = { 
+    "width": 0, 
+    "height": 0, 
+    "center": {
+        "x": 0,
+        "y": 0
+    } 
+}
 mouse_pos = { "x": -1, "y": -1 }
-mouse_down = False
-square_dragging = False
-circle_dragging = False
-drag_offset = { "x": 0, "y": 0 }
 
 # Bucle de l'aplicació
 def main():
@@ -47,7 +51,8 @@ def main():
 
 # Gestionar events
 def app_events():
-    mouse_inside = pygame.mouse.get_focused()
+    global mouse_pos
+    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
@@ -63,20 +68,64 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global mouse_pos
+    global window_size
+
+    window_size["width"] = screen.get_width()
+    window_size["height"] = screen.get_height()
+    window_size["center"]["x"] = int(screen.get_width() / 2)
+    window_size["center"]["y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
+    
+    # Definir mida rectangle exterior
+    ext_ample = window_size["width"] - 100
+    ext_alt = window_size["height"] - 100
+    ext_rect = (50, 50, ext_ample, ext_alt)
 
-    pygame.draw.rect(screen, BLACK, (50,50,550,400), 5)
-    pygame.draw.line(screen, BLACK, (0,250),(650,250), 5)
-    pygame.draw.line(screen, BLACK, (325,0),(325,500), 5)
+    # Dibuixar limits
+    pygame.draw.rect(screen, BLACK, ext_rect, 4)
 
-    pygame.draw.rect
+    # Linia vertical
+    start_tuple = (window_size["center"]["x"], 0)
+    end_tuple = (window_size["center"]["x"], window_size["height"])
+    pygame.draw.line(screen, BLACK, start_tuple, end_tuple, 4)
 
+    # Linia horitzontal
+    start_tuple = (0, window_size["center"]["y"])
+    end_tuple = (window_size["width"], window_size["center"]["y"])
+    pygame.draw.line(screen, BLACK, start_tuple, end_tuple, 4)
+
+    # Dibuixar quadre
+    q_x = mouse_pos["x"] - 20
+    q_y = mouse_pos["y"] - 20
+
+    color = get_color(q_x, q_y, 50, 50, ext_ample, ext_alt)
+
+    rect = (q_x, q_y, 40, 40)
+    pygame.draw.rect(screen, color, rect)
+    pygame.draw.rect(screen, BLACK, rect, 2)
+    
     pygame.display.update()
+
+def get_color(x, y, ext_x, ext_y, ext_ample, ext_alt):
+    color = BLACK
+
+    if x < ext_x or x > (ext_x + ext_ample) or y < ext_y or y > (ext_y + ext_alt):
+        return color
+    
+    if x < window_size["center"]["x"]:
+        if y < window_size["center"]["y"]:
+            return RED
+        else: 
+            return GREEN
+    else:
+        if y < window_size["center"]["y"]:
+            return BLUE
+        else: 
+            return YELLOW
 
 if __name__ == "__main__":
     main()

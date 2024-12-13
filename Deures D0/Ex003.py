@@ -52,7 +52,6 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     radio = 25 
-    radio2 = 25
 
     for i in range(9):
         if i%2==0:
@@ -61,11 +60,9 @@ def app_draw():
             color = WHITE
 
         pygame.draw.circle(screen, color, (350, 250), radio, 25)
-        radio += 25
+        pygame.draw.circle(screen, BLACK, (350, 250), radio, 4)
 
-    for i in range(9):
-        pygame.draw.circle(screen, BLACK, (350, 250), radio2, 4)
-        radio2 += 25
+        radio += 25
 
     pygame.display.update()
 

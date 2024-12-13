@@ -91,7 +91,7 @@ def app_draw():
         rect = rectangle["rect"]
 
         if fila == rectangle:
-            pygame.draw.rect(screen, rectangle["color"], (rect["x"],rect["y"],rect["width"],rect["height"]))
+            pygame.draw.rect(screen, rectangle["color"], (rect))
 
         pygame.draw.rect(screen, BLACK, (rect["x"],rect["y"],rect["width"],rect["height"]), 5)
 

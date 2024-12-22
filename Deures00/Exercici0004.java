@@ -10,7 +10,7 @@ public class Exercici0004 {
         int cnt = 0;
 
         for (char c : llista) {
-            if (Character.isLowerCase(c)){
+            if (Character.isUpperCase(c)){
                 cnt++;
             }
         }
@@ -24,7 +24,7 @@ public class Exercici0004 {
         int cnt = 0;
 
         for (char c : llista) {
-            if (Character.isUpperCase(c)){
+            if (Character.isLowerCase(c)){
                 cnt++;
             }
         }
@@ -49,7 +49,7 @@ public class Exercici0004 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("Escriu una contrasenya: ");
+        System.out.print("Escriu una contrasenya: ");
         String contrasenya = scanner.nextLine();
 
         System.out.println("La contrasenya '"+contrasenya+"': "+validaContrasenya(contrasenya));

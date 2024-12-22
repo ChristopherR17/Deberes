@@ -13,13 +13,13 @@ public class Exercici0003 {
         Scanner scanner = new Scanner(System.in);
         Locale localeUS = Locale.US;
 
-        System.out.println("Introdueix el preu base: ");
+        System.out.print("Introdueix el preu base: ");
         Double preuBase = scanner.nextDouble();
 
-        System.out.println("Introdueix l'IVA (%): ");
+        System.out.print("Introdueix l'IVA (%): ");
         Double iva = scanner.nextDouble();
 
-        System.out.println("Introdueix el descompte (%): ");
+        System.out.print("Introdueix el descompte (%): ");
         Double descompte = scanner.nextDouble();
 
         Double preuFinal = calcularPreuFinal(preuBase, iva, descompte);

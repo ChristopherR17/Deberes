@@ -8,10 +8,10 @@ public class Exercici0001 {
         Scanner scanner = new Scanner(System.in);
         Locale localeUS = Locale.US;
 
-        System.out.println("Escriu el pes (kg): ");
+        System.out.print("Escriu el pes (kg): ");
         Double pes = scanner.nextDouble();
 
-        System.out.println("Escriu l'alçada (cm): ");
+        System.out.print("Escriu l'alçada (cm): ");
         Double altura = scanner.nextDouble();
 
         altura = altura / 100;
@@ -23,3 +23,5 @@ public class Exercici0001 {
         scanner.close();
     }
 }
+
+

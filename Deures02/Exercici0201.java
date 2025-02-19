@@ -73,7 +73,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayEnters
      */
     public static int[] generaArrayEnters(int mida) {
-        int[] rst = new int[0];
+        int[] rst = new int[mida];
+        Random rd = new Random();
+
+        for (int i = 0; i < mida; i++) {
+            rst[i] = rd.nextInt(100);
+        }
         return rst;
     }
 
@@ -89,6 +94,26 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraArrayEstadistiques
      */
     public static void mostraArrayEstadistiques(int[] array) {
+        int suma=0;
+        int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+
+        for (int num : array) {
+            suma += num;
+            if (max<num) max=num;
+            if (min>num) min=num;
+        }
+
+        Double mitjana = suma/ (double) array.length;
+        System.out.print("Array: [");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("]");
+        System.out.println("Màxim: " + max + "  Mínim: " + min + "  Mitjana: " + mitjana);
     }
 
     /**
@@ -101,6 +126,11 @@ public class Exercici0201 {
      */
     public static ArrayList<Integer> generaLlistaEnters(int mida) {
         ArrayList<Integer> rst = new ArrayList<>();
+        Random rd = new Random();
+
+        for (int i = 0; i < mida; i++) {
+            rst.add(rd.nextInt(100));
+        }
         return rst;
     }
 
@@ -118,7 +148,15 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraLlistaEstadistiques
      */
     public static void mostraLlistaEstadistiques(ArrayList<Integer> llista) {
-
+        int max=Integer.MIN_VALUE, min=Integer.MAX_VALUE, suma=0;
+        for (int i = 0; i < llista.size(); i++) {
+            int num = llista.get(i);
+            suma += num;
+            if (max<num) max=num;
+            if (min>num) min=num;
+        }
+        System.out.println("Llista: " + llista);
+        System.out.println("Màxim: " + max + "  Mínim: " + min + "  Mitjana: " + (double) suma/llista.size());
     }
 
     /**
@@ -134,7 +172,7 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayParaulesAmbA
      */
     public static void filtraArrayParaulesAmbA() {
-        /*
+        
         System.out.println("Escriu 5 paraules separades per ',' o ', ':");
         String words = scanner.nextLine();
 
@@ -153,7 +191,7 @@ public class Exercici0201 {
             }
         }
         System.out.println("Paraules que comencen amb 'a':" + filtrades);
-        */
+        
     }
        
     /**
@@ -200,16 +238,14 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-        
-        double[] rst = new double[0];
-        
+        double[] rst = new double[mida];
+        Random rd = new Random();
+
         for (int cnt = 0; cnt < mida; cnt++) {
-            Random rd = new Random();
             rst[cnt] = rd.nextDouble(100);
         }
         
         return rst;
-        
     }
 
     /**
@@ -222,8 +258,9 @@ public class Exercici0201 {
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
         ArrayList<Double> rst = new ArrayList<>();
+        Random rd = new Random();
+
         for (int cnt = 0; cnt < mida; cnt++) {
-            Random rd = new Random();
             rst.add(rd.nextDouble(100));
         }
         return rst;
@@ -427,16 +464,19 @@ public class Exercici0201 {
      */
     public static void ordenarMapaPerClaus() {
         HashMap<String, Integer> map = new HashMap<>();
-        map.put("Banana", 3);
         map.put("Poma", 5);
+        map.put("Banana", 3);
         map.put("Taronja", 2);
 
         ArrayList<String> claus = new ArrayList<>(map.keySet());
-        claus.sort((p1, p2) -> map.get(p1).compareTo(map.get(p2)));
+        claus.sort((p1, p2) -> p1.compareTo(p2));
 
-        HashMap<String, Integer> mapa2 = new HashMap<>();
+        HashMap<String, Integer> map2 = new HashMap<>();
+        for (String clau : claus) {
+            map2.put(clau, map.get(clau));
+        }
 
-        System.out.println("Mapa ordenat per claus: "+map);
+        System.out.println("Mapa ordenat per claus: "+map2);
     }
 
     /**

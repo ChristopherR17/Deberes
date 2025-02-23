@@ -24,26 +24,94 @@ public class Table extends Component {
         rst.add(0, " ".repeat(width)); 
 
         String capcelera = "";
-        for (int cnt = 0; cnt < headers.size(); cnt++) {
-            String header = headers.get(cnt);
-            int width = widths.get(cnt);
-            String align = aligns.get(cnt);
+        for (int cntHeader = 0; cntHeader < headers.size(); cntHeader++) {
+            String header = headers.get(cntHeader);
+            int width = widths.get(cntHeader);
+            String align = aligns.get(cntHeader);
 
-            if (header.length() < width) {
-                capcelera = capcelera + header + " ".repeat(width - header.length());
+            if (align.equalsIgnoreCase("left")) {
+                if (header.length() < width) {
+                    capcelera += header + " ".repeat(width - header.length());
+                }
             }
-            else{
-                capcelera = capcelera + header.substring(0, width);
+            else if (align.equalsIgnoreCase("center")) {
+                int espacios = (width - header.length());
+                int aux = 0;
+
+                if (espacios%2!=0) {
+                    aux += 1;
+                }
+
+                espacios /= 2;
+
+                if (header.length() < width) {
+                    capcelera += " ".repeat(espacios + aux) + header + " ".repeat(espacios);
+                }
+            }
+            else {
+                if (header.length() < width) {
+                    capcelera += " ".repeat(width - header.length()) + header;
+                }
+            }
+
+            if(header.length() > width) {
+                capcelera += header.substring(0, width);
             }
         
-            if (cnt < (headers.size() - 1)) {
+            if (cntHeader < (headers.size() - 1)) {
                 capcelera += "│";
             }
         }
+
         rst.add(1, " " + capcelera + " ");
+        rst.add(2, "─".repeat(width));
+
+        for (int i = 0; i < rows.size(); i++) {
+            ArrayList<String> row = rows.get(i);
+            String linia = "";
+            for (int cntRows = 0; cntRows < row.size(); cntRows++) {
+                String element = row.get(cntRows);
+                int width = widths.get(cntRows);
+                String align = aligns.get(cntRows);
+
+                if (align.equalsIgnoreCase("left")) {
+                    if (element.length() < width) {
+                        linia += element + " ".repeat(width - element.length());
+                    }
+                }
+                else if (align.equalsIgnoreCase("center")) {
+                    int espacios = (width - element.length());
+                    int aux = 0;
+
+                    if (espacios%2!=0) {
+                        aux += 1;
+                    }
+
+                    espacios /= 2;
+
+                    if (element.length() < width) {
+                        linia += " ".repeat(espacios + aux) + element + " ".repeat(espacios);
+                    }
+                }
+                else {
+                    if (element.length() < width) {
+                        linia += " ".repeat(width - element.length()) + element;
+                    }
+                }
+
+                if(element.length() > width) {
+                    linia += element.substring(0, width);
+                }
+            
+                if (cntRows < (headers.size() - 1)) {
+                    linia += "│";
+                }
+            }
+            rst.add(3+i, " " + linia + " ");
+        }
 
         // Asignar text segons alineació 
-        for (int i = 2; i < height; i++) {
+        for (int i = 7; i < height; i++) {
             rst.add(i, "x".repeat(width));
         }
         return rst;

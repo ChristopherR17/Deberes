@@ -22,18 +22,18 @@ public class Table extends Component {
             return txt.substring(0, width);
         }
 
+        int espacios = (width - txt.length());
         if (align.equalsIgnoreCase("left")){
-            return txt + " ".repeat(width - txt.length());
+            return txt + " ".repeat(espacios);
         }
         else if (align.equalsIgnoreCase("center")){
-            int espacios = (width - txt.length());
             int aux = espacios%2;
             espacios /= 2;
 
             return " ".repeat(espacios + aux) + txt + " ".repeat(espacios);            
         }
         else if (align.equalsIgnoreCase("right")){
-            return " ".repeat(width - txt.length()) + txt;
+            return " ".repeat(espacios) + txt;
         }
 
         return txt;
@@ -53,126 +53,54 @@ public class Table extends Component {
             }
         }
 
-        rst.add(" " + capcelera + " ");
-        rst.add("─".repeat(width));
+        rst.add(" " + capcelera + " ".repeat((super.width - capcelera.length()-1)));
 
-        
-        for (ArrayList<String> row : rows) {
-            String linia = "";
-            for (int cntRows = 0; cntRows < row.size(); cntRows++) {
-                linia += formatRow(row.get(cntRows), widths.get(cntRows), aligns.get(cntRows));
-                if (cntRows < (headers.size() - 1)) {
-                    linia += "│";
-                }
-            }
-            rst.add(" " + linia + " ");
-        }
-
-        // Asignar text segons alineació 
-        for (int i = rst.size(); i < height; i++) {
-            rst.add(i, "x".repeat(width));
-        }
-        return rst;
-    }
-
-    /*
-    public ArrayList<String> render() {
-        ArrayList<String> rst = new ArrayList<String>();
-
-        // Afegir linia buida al principi
-        rst.add(0, " ".repeat(width)); 
-
-        String capcelera = "";
-        for (int cntHeader = 0; cntHeader < headers.size(); cntHeader++) {
-            String header = headers.get(cntHeader);
-            int width = widths.get(cntHeader);
-            String align = aligns.get(cntHeader);
-
-            if (align.equalsIgnoreCase("left")) {
-                if (header.length() < width) {
-                    capcelera += header + " ".repeat(width - header.length());
-                }
-            }
-            else if (align.equalsIgnoreCase("center")) {
-                int espacios = (width - header.length());
-                int aux = 0;
-
-                if (espacios%2!=0) {
-                    aux += 1;
-                }
-
-                espacios /= 2;
-
-                if (header.length() < width) {
-                    capcelera += " ".repeat(espacios + aux) + header + " ".repeat(espacios);
-                }
-            }
-            else if (align.equalsIgnoreCase("right")){
-                if (header.length() < width) {
-                    capcelera += " ".repeat(width - header.length()) + header;
-                }
-            }
-
-            if(header.length() > width) {
-                capcelera += header.substring(0, width);
-            }
-        
-            if (cntHeader < (headers.size() - 1)) {
-                capcelera += "│";
-            }
-        }
-
-        rst.add(1, " " + capcelera + " ");
-        rst.add(2, "─".repeat(width));
-
-        for (int i = 0; i < rows.size(); i++) {
-            ArrayList<String> row = rows.get(i);
-            String linia = "";
-            for (int cntRows = 0; cntRows < row.size(); cntRows++) {
-                String element = row.get(cntRows);
-                int width = widths.get(cntRows);
-                String align = aligns.get(cntRows);
-
-                if (align.equalsIgnoreCase("left")) {
-                    if (element.length() < width) {
-                        linia += element + " ".repeat(width - element.length());
-                    }
-                }
-                else if (align.equalsIgnoreCase("center")) {
-                    int espacios = (width - element.length());
-                    int aux = 0;
-
-                    if (espacios%2!=0) {
-                        aux += 1;
-                    }
-
-                    espacios /= 2;
-
-                    if (element.length() < width) {
-                        linia += " ".repeat(espacios + aux) + element + " ".repeat(espacios);
-                    }
-                }
-                else if (align.equalsIgnoreCase("right")){
-                    if (element.length() < width) {
-                        linia += " ".repeat(width - element.length()) + element;
-                    }
-                }
-
-                if(element.length() > width) {
-                    linia += element.substring(0, width);
-                }
+        String separador="";
+        for (int i = 0; i < widths.size(); i++) {
+            int width = widths.get(i);
             
-                if (cntRows < (headers.size() - 1)) {
-                    linia += "│";
-                }
+            if (i != widths.size()-1) {
+                separador = separador + "┼" + "─".repeat(width);
+            } else {
+                separador = separador + "┼" + "─".repeat(width + (super.width - capcelera.length()-1));
             }
-            rst.add(" " + linia + " ");
+        }
+        rst.add(2, separador);
+        
+        // for (ArrayList<String> row : rows) {
+        //     String linia = "";
+        //     for (int cntRows = 0; cntRows < row.size(); cntRows++) {
+        //         linia += formatRow(row.get(cntRows), widths.get(cntRows), aligns.get(cntRows));
+        //         if (cntRows < (headers.size() - 1)) {
+        //             linia += "│";
+        //         }
+        //     }
+        //     rst.add(" " + linia + " ".repeat((super.width - linia.length()-1)));
+        // }
+
+        for (int i = 3; i < height; i++) {
+            if (rst.get(i) != null) {
+                String linia = "";
+
+                for (int cntRows = 0; cntRows < rows.get(cntRows).size(); cntRows++) {
+                    ArrayList<String> row = rows.get(cntRows);
+
+                    linia += formatRow(row.get(cntRows), widths.get(cntRows), aligns.get(cntRows));
+                    if (cntRows < (headers.size() - 1)) {
+                        linia += "│";
+                    }
+                }
+                rst.add(i," " + linia + " ".repeat((width - linia.length()-1)));
+            }else {
+                rst.add(i, " ".repeat(width));
+            }
         }
 
-        // Asignar text segons alineació 
-        for (int i = rst.size(); i < height; i++) {
-            rst.add(i, "x".repeat(width));
-        }
+        //Asignar text segons alineació 
+        // for (int i = rst.size(); i < height; i++) {
+        //     rst.add(i, " ".repeat(width));
+        // }
         return rst;
-    }  */
+
+    }
 }

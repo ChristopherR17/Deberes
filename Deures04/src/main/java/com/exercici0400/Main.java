@@ -39,7 +39,7 @@ public class Main {
 */
 
         ArrayList<String> tabHeaders0 = new ArrayList<>(Arrays.asList("col0", "col1", "col2"));
-        ArrayList<Integer> tabWidth0 = new ArrayList<>(Arrays.asList(5, 8, 11));
+        ArrayList<Integer> tabWidth0 = new ArrayList<>(Arrays.asList(5, 8, 10));
         ArrayList<String> tabAligns0 = new ArrayList<>(Arrays.asList("left", "right", "center"));
         ArrayList<ArrayList<String>> tabRows0 = new ArrayList<>(Arrays.asList(
             new ArrayList<>(Arrays.asList("ab", "si", "gos")),

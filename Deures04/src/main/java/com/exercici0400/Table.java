@@ -17,6 +17,65 @@ public class Table extends Component {
         this.rows = rows;
     }
 
+    private String formatRow(String txt, int width, String align){
+        if (txt.length() > width) {
+            return txt.substring(0, width);
+        }
+
+        if (align.equalsIgnoreCase("left")){
+            return txt + " ".repeat(width - txt.length());
+        }
+        else if (align.equalsIgnoreCase("center")){
+            int espacios = (width - txt.length());
+            int aux = espacios%2;
+            espacios /= 2;
+
+            return " ".repeat(espacios + aux) + txt + " ".repeat(espacios);            
+        }
+        else if (align.equalsIgnoreCase("right")){
+            return " ".repeat(width - txt.length()) + txt;
+        }
+
+        return txt;
+    }
+
+    public ArrayList<String> render() {
+        ArrayList<String> rst = new ArrayList<String>();
+
+        // Afegir linia buida al principi
+        rst.add(0, " ".repeat(width)); 
+
+        String capcelera = "";
+        for (int cntHeader = 0; cntHeader < headers.size(); cntHeader++) {
+            capcelera += formatRow(headers.get(cntHeader), widths.get(cntHeader), aligns.get(cntHeader));
+            if (cntHeader < (headers.size() - 1)) {
+                capcelera += "│";
+            }
+        }
+
+        rst.add(" " + capcelera + " ");
+        rst.add("─".repeat(width));
+
+        
+        for (ArrayList<String> row : rows) {
+            String linia = "";
+            for (int cntRows = 0; cntRows < row.size(); cntRows++) {
+                linia += formatRow(row.get(cntRows), widths.get(cntRows), aligns.get(cntRows));
+                if (cntRows < (headers.size() - 1)) {
+                    linia += "│";
+                }
+            }
+            rst.add(" " + linia + " ");
+        }
+
+        // Asignar text segons alineació 
+        for (int i = rst.size(); i < height; i++) {
+            rst.add(i, "x".repeat(width));
+        }
+        return rst;
+    }
+
+    /*
     public ArrayList<String> render() {
         ArrayList<String> rst = new ArrayList<String>();
 
@@ -48,7 +107,7 @@ public class Table extends Component {
                     capcelera += " ".repeat(espacios + aux) + header + " ".repeat(espacios);
                 }
             }
-            else {
+            else if (align.equalsIgnoreCase("right")){
                 if (header.length() < width) {
                     capcelera += " ".repeat(width - header.length()) + header;
                 }
@@ -93,7 +152,7 @@ public class Table extends Component {
                         linia += " ".repeat(espacios + aux) + element + " ".repeat(espacios);
                     }
                 }
-                else {
+                else if (align.equalsIgnoreCase("right")){
                     if (element.length() < width) {
                         linia += " ".repeat(width - element.length()) + element;
                     }
@@ -107,13 +166,13 @@ public class Table extends Component {
                     linia += "│";
                 }
             }
-            rst.add(3+i, " " + linia + " ");
+            rst.add(" " + linia + " ");
         }
 
         // Asignar text segons alineació 
-        for (int i = 7; i < height; i++) {
+        for (int i = rst.size(); i < height; i++) {
             rst.add(i, "x".repeat(width));
         }
         return rst;
-    } 
+    }  */
 }

@@ -25,6 +25,13 @@ public class Menu extends Component {
     }
 
     public int getSelection(String text) {
+        for (int i = 0; i < items.size(); i++) {
+            MenuItem item = items.get(i);
+
+            if (item.isInKeyWords(text) || text.equalsIgnoreCase(Integer.toString(i))) {
+                return i;
+            }
+        }
         return -1;
     }
 
@@ -65,6 +72,5 @@ public class Menu extends Component {
         }
         
         return rst;
-
     } 
 }

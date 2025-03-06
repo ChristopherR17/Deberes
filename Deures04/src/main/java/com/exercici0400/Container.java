@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Container extends Component {
  
-
     private ArrayList<Component> components;
 
     public Container(int width, int height, ArrayList<Component> components) {

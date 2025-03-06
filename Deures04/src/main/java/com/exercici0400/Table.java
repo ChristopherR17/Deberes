@@ -67,16 +67,6 @@ public class Table extends Component {
         }
         rst.add(2, separador);
         
-        // for (ArrayList<String> row : rows) {
-        //     String linia = "";
-        //     for (int cntRows = 0; cntRows < row.size(); cntRows++) {
-        //         linia += formatRow(row.get(cntRows), widths.get(cntRows), aligns.get(cntRows));
-        //         if (cntRows < (headers.size() - 1)) {
-        //             linia += "│";
-        //         }
-        //     }
-        //     rst.add(" " + linia + " ".repeat((super.width - linia.length()-1)));
-        // }
 
         for (int i = 3; i < height; i++) {
             if (rst.get(i) != null) {
@@ -96,10 +86,6 @@ public class Table extends Component {
             }
         }
 
-        //Asignar text segons alineació 
-        // for (int i = rst.size(); i < height; i++) {
-        //     rst.add(i, " ".repeat(width));
-        // }
         return rst;
 
     }

@@ -437,43 +437,19 @@ public class Exercici0203 {
      */
     public static ArrayList<HashMap<String, Object>> generaBaralla() {
         ArrayList<HashMap<String, Object>> baralla = new ArrayList<>();
-        String[] pals = {"oros", "copes", "espases", "bastos"};
 
+        Integer totalCartes = 12;
+        String[] pals = {"oros", "copes", "espases", "bastos"};
         for (String pal : pals) {
-            if (pal.equalsIgnoreCase("oros")) {
-                HashMap<String, Integer> oros = new HashMap<>();
-                oros.put(pal, 1);
-                oros.put(pal, 2);
-                oros.put(pal, 3);
-                oros.put(pal, 4);
-                oros.put(pal, 5);
-                oros.put(pal, 6);
-                oros.put(pal, 7);
-                oros.put(pal, 8);
-                oros.put(pal, 9);
-                oros.put(pal, 10);
-                oros.put(pal, 11);
-                oros.put(pal, 12);
-            } else if (pal.equalsIgnoreCase("copes")){
-                HashMap<String, Integer> copes = new HashMap<>();
-                copes.put(pal, 1);
-                copes.put(pal, 2);
-                copes.put(pal, 3);
-                copes.put(pal, 4);
-                copes.put(pal, 5);
-                copes.put(pal, 6);
-                copes.put(pal, 7);
-                copes.put(pal, 8);
-                copes.put(pal, 9);
-                copes.put(pal, 10);
-                copes.put(pal, 11);
-                copes.put(pal, 12);
-            } else if (pal.equalsIgnoreCase("espases")){
-                HashMap<String, Integer> espases = new HashMap<>();
-            } else{
-                HashMap<String, Integer> bastos = new HashMap<>();
+            for (int i = 1; i < totalCartes + 1; i ++) {
+                HashMap<String, Object> carta = new HashMap<>();
+                carta.put("pal", pal);
+                carta.put("número", i);
+                baralla.add(carta);
             }
         }
+
+        Collections.shuffle(baralla);
 
         return baralla;
     }
@@ -487,6 +463,12 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGuardaBaralla
      */
     public static void guardaBaralla(String filePath) throws IOException {
+        ArrayList<HashMap<String, Object>> baralla = generaBaralla();
+        JSONArray jsonArray = new JSONArray(baralla);
 
+        FileWriter file = new FileWriter(filePath);
+        file.write(jsonArray.toString(4).getBytes());
+
+        System.out.println("Arxiu 'baralla' creat correctament.");
     }
 }

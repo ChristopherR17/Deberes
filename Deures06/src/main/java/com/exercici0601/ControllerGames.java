@@ -26,7 +26,7 @@ import javafx.scene.layout.VBox;
 import com.exercici0601.ControllerItem;
 
 
-public class ControllerCharacters implements Initializable {
+public class ControllerGames implements Initializable {
 
     @FXML
     private ImageView imgArrowBack;
@@ -47,31 +47,6 @@ public class ControllerCharacters implements Initializable {
         }
     }
 
-    /**
-     * Funcion para arreglar los nombres de las imagenes
-     * @param str Es el nombre de la imagen
-     * @return Devuelve los nombre arreglados si lo necesitan
-     */
-    public String arreglarNombre(String str){
-        String rst = "";
-
-        if (str.equalsIgnoreCase("donkey kong")) {
-            String[] nombres = str.split(" ");
-
-            for (String nombre : nombres) {
-                rst += String.valueOf(nombre.charAt(0));
-            }
-        }
-        else if (str.equalsIgnoreCase("samus aran")){
-            rst = str.substring(0, 5);
-        }
-        else{
-            rst = str;
-        }
-
-        return rst;
-    }
-
     public void loadList() {
         try {
             URL jsonFileURL = getClass().getResource("/assets/data/characters.json");
@@ -83,15 +58,19 @@ public class ControllerCharacters implements Initializable {
             for (int i = 0; i < jsonInfo.length(); i++) {
                 JSONObject character = jsonInfo.getJSONObject(i);
                 String name = character.getString("name");
+                int year = character.getInt("year");
+                String type = character.getString("type");
+                String plot = character.getString("plot");
+                String image = character.getString("image");
 
-                URL resource = this.getClass().getResource("/assets/subViewCharacters.fxml");
+                URL resource = this.getClass().getResource("/assets/subViewGames.fxml");
                 FXMLLoader loader = new FXMLLoader(resource);
                 Parent itemTemplate = loader.load();
                 ControllerItem itemController = loader.getController();
 
                 itemController.setName(name);
 
-                itemController.setImatge("/assets/images0601/" + "character_" + arreglarNombre(name).toLowerCase() + ".png");
+                itemController.setImatge("/assets/images0601/" + image + ".png");
 
                 list.getChildren().add(itemTemplate);
             }

@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -10,15 +9,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="192.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerItem">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="196.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerItem">
    <children>
       <Pane prefHeight="1.0" style="-fx-background-color: #aaaaaa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
       <HBox alignment="CENTER" layoutX="27.0" prefHeight="100.0" prefWidth="430.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="192.0" prefWidth="115.0">
                <children>
-                  <ImageView fx:id="img" fitHeight="95.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="year" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" text="Year">
+                  <ImageView fx:id="img" fitHeight="95.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets right="20.0" />
+                     </VBox.margin></ImageView>
+                  <Label fx:id="date" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" text="Date">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -41,7 +43,7 @@
                         <Insets bottom="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="type" prefHeight="25.0" text="Type">
+                  <Label fx:id="type" prefHeight="25.0" text="Procesador">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -49,8 +51,10 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <TextArea fx:id="plot" prefHeight="56.0" prefWidth="272.0" />
                </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>

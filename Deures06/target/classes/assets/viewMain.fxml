@@ -52,7 +52,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <Label maxHeight="50.0" text="Jocs">
+                                    <Label maxHeight="50.0" onMouseClicked="#toViewGames" text="Jocs">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

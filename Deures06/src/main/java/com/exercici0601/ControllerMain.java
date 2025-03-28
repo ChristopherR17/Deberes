@@ -28,4 +28,12 @@ public class ControllerMain {
         ctrlCharacters.loadList();
         UtilsViews.setViewAnimating("ViewCharacters");
     }
+
+    @FXML
+    private void toViewGames(MouseEvent event) {
+        System.out.println("To View Games");
+        ControllerGames ctrlGames = (ControllerGames) UtilsViews.getController("ViewGames");
+        ctrlGames.loadList();
+        UtilsViews.setViewAnimating("ViewGames");
+    }
 }

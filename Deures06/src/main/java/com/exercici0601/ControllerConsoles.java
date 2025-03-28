@@ -1,5 +1,7 @@
 package com.exercici0601;
 
+package com.exercici0601;
+
 import com.utils.*;
 
 import java.net.URL;
@@ -26,7 +28,7 @@ import javafx.scene.layout.VBox;
 import com.exercici0601.ControllerItem;
 
 
-public class ControllerGames implements Initializable {
+public class ControllerConsoles implements Initializable {
 
     @FXML
     private ImageView imgArrowBack;
@@ -49,29 +51,28 @@ public class ControllerGames implements Initializable {
 
     public void loadList() {
         try {
-            URL jsonFileURL = getClass().getResource("/assets/data/games.json");
+            URL jsonFileURL = getClass().getResource("/assets/data/consoles.json");
             Path path = Paths.get(jsonFileURL.toURI());
             String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
             JSONArray jsonInfo = new JSONArray(content);
 
             list.getChildren().clear();
             for (int i = 0; i < jsonInfo.length(); i++) {
-                JSONObject character = jsonInfo.getJSONObject(i);
-                String name = character.getString("name");
-                int year = character.getInt("year");
-                String type = character.getString("type");
-                String plot = character.getString("plot");
-                String image = character.getString("image");
+                JSONObject console = jsonInfo.getJSONObject(i);
+                String name = console.getString("name");
+                int units_sold = console.getInt("units_sold");
+                String date = console.getString("date");
+                String procesador = console.getString("procesador");
+                String color = console.getString("color");
+                String image = console.getString("image");
 
-                URL resource = this.getClass().getResource("/assets/subViewGames.fxml");
+                URL resource = this.getClass().getResource("/assets/subViewConsoles.fxml");
                 FXMLLoader loader = new FXMLLoader(resource);
                 Parent itemTemplate = loader.load();
                 ControllerItem itemController = loader.getController();
 
                 itemController.setName(name);
-                itemController.setYear(String.valueOf(year));
-                itemController.setType(type);
-                itemController.setPlot(plot);
+                
 
                 itemController.setImatge("/assets/images0601/" + image);
 

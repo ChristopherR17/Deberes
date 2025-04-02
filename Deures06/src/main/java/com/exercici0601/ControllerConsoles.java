@@ -1,7 +1,5 @@
 package com.exercici0601;
 
-package com.exercici0601;
-
 import com.utils.*;
 
 import java.net.URL;

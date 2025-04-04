@@ -35,9 +35,9 @@ public class Main extends Application {
         stage.setMinHeight(MIN_HEIGHT);
         stage.setHeight(WINDOW_HEIGHT);
         stage.show();
-        
-        //Carregar dades de la llista inicial
-        ControllerPokeList crtl = (ControllerPokeList) UtilsViews.getController("ViewTaula");
+
+        // Carregar dades de la llista inicial()
+        ControllerPokeList crtl = (ControllerPokeList) UtilsViews.getController("ViewList");
         crtl.loadList();
 
         // Afegeix una icona només si no és un Mac

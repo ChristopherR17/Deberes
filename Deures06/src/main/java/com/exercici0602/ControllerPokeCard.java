@@ -71,7 +71,7 @@ public class ControllerPokeCard implements Initializable{
             HashMap<String, Object> pokemon = llistaPokemons.get(0); 
 
             String name = (String) pokemon.get("name");
-            String numName = "#" + String.valueOf(this.number) + " " + name;
+            String numName = "#" + this.number + " " + name;
 
             labelAbility.setText((String) pokemon.get("type"));
             labelType.setText((String) pokemon.get("ability"));

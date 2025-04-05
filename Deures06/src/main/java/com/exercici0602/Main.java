@@ -9,13 +9,14 @@ import javafx.stage.Stage;
 
 // Fes anar l'exercici amb:
 // ./run.sh com.exercici0602.Main
+// ./run.ps1 com.exercici0602.Main
 
 public class Main extends Application {
 
-    final int WINDOW_WIDTH = 600;
-    final int WINDOW_HEIGHT = 400;
-    final int MIN_WIDTH = 600;
-    final int MIN_HEIGHT = 400;
+    public static final int WINDOW_WIDTH = 600;
+    public static final int WINDOW_HEIGHT = 400;
+    public static final int MIN_WIDTH = 600;
+    public static final int MIN_HEIGHT = 400;
 
     @Override
     public void start(Stage stage) throws Exception {

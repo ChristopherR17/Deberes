@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 // Fes anar l'exemple amb:
 // ./run.sh com.exercici0601.Main
+// ./run.ps1 com.exercici0601.Main
 
 public class Main extends Application {
 
@@ -28,6 +29,9 @@ public class Main extends Application {
         UtilsViews.addView(getClass(), "ViewMain", "/assets/viewMain.fxml");
         UtilsViews.addView(getClass(), "ViewCharacters", "/assets/viewCharacters.fxml");
         UtilsViews.addView(getClass(), "ViewGames", "/assets/viewGames.fxml");
+        UtilsViews.addView(getClass(), "ViewConsoles", "/assets/viewConsoles.fxml");
+
+        UtilsViews.addView(getClass(), "ViewCharacter", "/assets/viewCharacter.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
 

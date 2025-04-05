@@ -47,31 +47,6 @@ public class ControllerCharacters implements Initializable {
         }
     }
 
-    /**
-     * Funcion para arreglar los nombres de las imagenes
-     * @param str Es el nombre de la imagen
-     * @return Devuelve los nombre arreglados si lo necesitan
-     */
-    public String arreglarNombre(String str){
-        String rst = "";
-
-        if (str.equalsIgnoreCase("donkey kong")) {
-            String[] nombres = str.split(" ");
-
-            for (String nombre : nombres) {
-                rst += String.valueOf(nombre.charAt(0));
-            }
-        }
-        else if (str.equalsIgnoreCase("samus aran")){
-            rst = str.substring(0, 5);
-        }
-        else{
-            rst = str;
-        }
-
-        return rst;
-    }
-
     public void loadList() {
         try {
             URL jsonFileURL = getClass().getResource("/assets/data/characters.json");
@@ -83,6 +58,7 @@ public class ControllerCharacters implements Initializable {
             for (int i = 0; i < jsonInfo.length(); i++) {
                 JSONObject character = jsonInfo.getJSONObject(i);
                 String name = character.getString("name");
+                String image = character.getString("image");
 
                 URL resource = this.getClass().getResource("/assets/subViewCharacters.fxml");
                 FXMLLoader loader = new FXMLLoader(resource);
@@ -90,8 +66,7 @@ public class ControllerCharacters implements Initializable {
                 ControllerItem itemController = loader.getController();
 
                 itemController.setName(name);
-
-                itemController.setImatge("/assets/images0601/" + "character_" + arreglarNombre(name).toLowerCase() + ".png");
+                itemController.setImatge("/assets/images0601/" + image);
 
                 list.getChildren().add(itemTemplate);
             }

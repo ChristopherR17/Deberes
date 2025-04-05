@@ -56,13 +56,10 @@ public class ControllerConsoles implements Initializable {
 
             list.getChildren().clear();
             for (int i = 0; i < jsonInfo.length(); i++) {
-                JSONObject console = jsonInfo.getJSONObject(i);
-                String name = console.getString("name");
-                int units_sold = console.getInt("units_sold");
-                String date = console.getString("date");
-                String procesador = console.getString("procesador");
-                String color = console.getString("color");
-                String image = console.getString("image");
+                JSONObject consoles = jsonInfo.getJSONObject(i);
+                String name = consoles.getString("name");
+                String date = consoles.getString("date");
+                String image = consoles.getString("image");
 
                 URL resource = this.getClass().getResource("/assets/subViewConsoles.fxml");
                 FXMLLoader loader = new FXMLLoader(resource);
@@ -70,8 +67,7 @@ public class ControllerConsoles implements Initializable {
                 ControllerItem itemController = loader.getController();
 
                 itemController.setName(name);
-                
-
+                itemController.setDate(date);
                 itemController.setImatge("/assets/images0601/" + image);
 
                 list.getChildren().add(itemTemplate);

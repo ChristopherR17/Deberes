@@ -1,39 +1,40 @@
 package com.exercici0601;
 
-import com.utils.*;
-
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import com.utils.UtilsViews;
+
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
-import com.exercici0601.ControllerItem;
-
-
-public class ControllerGames implements Initializable {
+public class ControllerCharacter implements Initializable{
 
     @FXML
     private ImageView imgArrowBack;
 
     @FXML
-    private VBox list = new VBox();
+    private Label name = new Label();
+    @FXML
+    private Label game = new Label();
+    @FXML
+    private ImageView img;
 
+    private String nameChar = "";
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Path imagePath = null;
@@ -47,30 +48,30 @@ public class ControllerGames implements Initializable {
         }
     }
 
-    public void loadList() {
+    public void loadCharacter(String nameChar) {
+        this.nameChar = nameChar;
         try {
-            URL jsonFileURL = getClass().getResource("/assets/data/games.json");
+            URL jsonFileURL = getClass().getResource("/assets/data/characters.json");
             Path path = Paths.get(jsonFileURL.toURI());
             String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
             JSONArray jsonInfo = new JSONArray(content);
 
-            list.getChildren().clear();
+            //list.getChildren().clear();
             for (int i = 0; i < jsonInfo.length(); i++) {
-                JSONObject games = jsonInfo.getJSONObject(i);
-                String name = games.getString("name");
-                int year = games.getInt("year");
-                String image = games.getString("image");
-
-                URL resource = this.getClass().getResource("/assets/subViewGames.fxml");
-                FXMLLoader loader = new FXMLLoader(resource);
-                Parent itemTemplate = loader.load();
-                ControllerItem itemController = loader.getController();
-
-                itemController.setName(name);
-                itemController.setYear(String.valueOf(year));
-                itemController.setImatge("/assets/images0601/" + image);
+                JSONObject character = jsonInfo.getJSONObject(i);
                 
-                list.getChildren().add(itemTemplate);
+                if (this.nameChar.equalsIgnoreCase(character.getString("name"))) {
+                    name.setText(character.getString("name"));
+                    game.setText(character.getString("game"));
+                    try {
+                        String imagePath = character.getString("image");
+                        Image image = new Image("/assets/images0601/" + imagePath);
+                        img.setImage(image);
+                    } catch (Exception e) {
+                        System.err.println("Error loading image asset: " + character.getString("image"));
+                        e.printStackTrace();
+                    }
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -78,7 +79,7 @@ public class ControllerGames implements Initializable {
     }
 
     @FXML
-    private void toViewMain(MouseEvent event) {
-        UtilsViews.setViewAnimating("ViewMain");
+    private void goBack(MouseEvent event) {
+        UtilsViews.setViewAnimating("ViewCharacters");
     }
 }

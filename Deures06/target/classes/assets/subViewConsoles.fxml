@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="111.0" prefHeight="50.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerItem">
+<AnchorPane maxHeight="111.0" onMouseClicked="#toViewConsole" prefHeight="50.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0601.ControllerItem">
    <children>
       <Label fx:id="name" layoutX="82.0" layoutY="1.0" prefHeight="27.0" prefWidth="196.0" text="Name" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="1.0">
          <font>

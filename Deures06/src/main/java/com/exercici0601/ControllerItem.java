@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.TextArea;
 import javafx.fxml.FXML;
 
 public class ControllerItem {
@@ -21,12 +20,10 @@ public class ControllerItem {
     private ImageView img;
 
     @FXML
-    private Label year, type;
-    @FXML
-    private TextArea plot;
+    private Label year;
 
     @FXML
-    private Label date, procesador, color, units_sold;
+    private Label date;
 
     /*Setters generales */
     public void setName(String name) {
@@ -47,25 +44,10 @@ public class ControllerItem {
     public void setYear(String year) {
         this.year.setText(year);
     }
-    public void setType(String type) {
-        this.type.setText(type);
-    }
-    public void setPlot(String plot) {
-        this.plot.setText(plot);
-    }
 
     /*Setters de Consoles */
     public void setDate(String date){
         this.date.setText(date);
-    }
-    public void setProcesador(String procesador){
-        this.procesador.setText(procesador);
-    }
-    public void setColor(String color){
-        this.color.setText(color);
-    }
-    public void setUnitsSold(String units_sold){
-        this.units_sold.setText(units_sold);
     }
 
     @FXML
@@ -74,5 +56,21 @@ public class ControllerItem {
         ControllerCharacter ctrl = (ControllerCharacter) UtilsViews.getController("ViewCharacter");
         ctrl.loadCharacter(nameChar);
         UtilsViews.setViewAnimating("ViewCharacter");
+    }
+
+    @FXML
+    private void toViewGame(MouseEvent event) {
+        System.out.println("To View Game");
+        ControllerGame ctrl = (ControllerGame) UtilsViews.getController("ViewGame");
+        ctrl.loadGame(nameChar);
+        UtilsViews.setViewAnimating("ViewGame");
+    }
+
+    @FXML
+    private void toViewConsole(MouseEvent event) {
+        System.out.println("To View Console");
+        ControllerConsole ctrl = (ControllerConsole) UtilsViews.getController("ViewConsole");
+        ctrl.loadConsole(nameChar);
+        UtilsViews.setViewAnimating("ViewConsole");
     }
 }

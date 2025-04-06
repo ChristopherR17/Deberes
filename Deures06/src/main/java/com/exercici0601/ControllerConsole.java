@@ -20,26 +20,32 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
-public class ControllerCharacter implements Initializable{
+public class ControllerConsole implements Initializable {
 
     @FXML
     private ImageView imgArrowBack;
 
     @FXML
+    private Circle circle = new Circle();
+    @FXML
+    private Label color = new Label();
+    @FXML
     private Label name = new Label();
     @FXML
-    private Label game = new Label();
+    private Label date = new Label();
     @FXML
-    private Label colorL = new Label();
+    private Label procesador = new Label();
+    @FXML
+    private Label unitsSold = new Label();
+
     @FXML
     private ImageView img;
-    @FXML
-    private Circle circle = new Circle();
 
-    private String nameChar = "";
-    
+    private String nameConsole = "";
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Path imagePath = null;
@@ -53,28 +59,30 @@ public class ControllerCharacter implements Initializable{
         }
     }
 
-    public void loadCharacter(String nameChar) {
-        this.nameChar = nameChar;
+    public void loadConsole(String nameConsole) {
+        this.nameConsole = nameConsole;
         try {
-            URL jsonFileURL = getClass().getResource("/assets/data/characters.json");
+            URL jsonFileURL = getClass().getResource("/assets/data/consoles.json");
             Path path = Paths.get(jsonFileURL.toURI());
             String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
             JSONArray jsonInfo = new JSONArray(content);
 
             for (int i = 0; i < jsonInfo.length(); i++) {
-                JSONObject character = jsonInfo.getJSONObject(i);
-                
-                if (this.nameChar.equalsIgnoreCase(character.getString("name"))) {
-                    name.setText(character.getString("name"));
-                    game.setText(character.getString("game"));
-                    colorL.setText(character.getString("color"));
-                    circle.setStyle("-fx-fill: " + character.getString("color"));
+                JSONObject consoles = jsonInfo.getJSONObject(i);
+
+                if (this.nameConsole.equalsIgnoreCase(consoles.getString("name"))) {
+                    name.setText(consoles.getString("name"));
+                    date.setText(consoles.getString("date"));
+                    procesador.setText(consoles.getString("procesador"));
+                    unitsSold.setText(String.valueOf(consoles.getInt("units_sold")));
+                    color.setText(consoles.getString("color"));
+                    circle.setStyle("-fx-fill: " + consoles.getString("color"));
                     try {
-                        String imagePath = character.getString("image");
+                        String imagePath = consoles.getString("image");
                         Image image = new Image("/assets/images0601/" + imagePath);
                         img.setImage(image);
                     } catch (Exception e) {
-                        System.err.println("Error loading image asset: " + character.getString("image"));
+                        System.err.println("Error loading image asset: " + consoles.getString("image"));
                         e.printStackTrace();
                     }
                 }
@@ -86,6 +94,6 @@ public class ControllerCharacter implements Initializable{
 
     @FXML
     private void goBack(MouseEvent event) {
-        UtilsViews.setViewAnimating("ViewCharacters");
+        UtilsViews.setViewAnimating("ViewConsoles");
     }
 }

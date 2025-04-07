@@ -10,6 +10,7 @@ com/exercici0602/AppData.class
 com/exercici0600/Main.class
 com/exercici0602/BuildDatabase.class
 com/exercici0601/ControllerItem.class
+com/exercici0602/BuildJSON.class
 com/utils/UtilsViews.class
 com/exercici0602/ControllerPokeForm.class
 com/exercici0602/Main.class
